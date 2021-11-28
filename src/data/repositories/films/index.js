@@ -1,6 +1,6 @@
 const errors = require('../../../common/errors');
 const mapper = require('../../mapper');
-const PostDomainModel = require('../../../domain/posts/model');
+const FilmDomainModel = require('../../../domain/films/model');
 
 const DEFAULT_PAGINATION_CONTENT = {
   pagination: {},
@@ -13,7 +13,7 @@ const handleUsersPaginationResponse = (response) => {
     return DEFAULT_PAGINATION_CONTENT;
   }
   const postsList = {
-    data: response.docs.map(doc => mapper.toDomainModel(doc, PostDomainModel)),
+    data: response.docs.map(doc => mapper.toDomainModel(doc, FilmDomainModel)),
     pagination: {
       total: response.total,
       limit: response.limit,
@@ -50,7 +50,6 @@ const filmStore = {
   async listFilms(options) {
     try {
       const { Film: filmSchema } = this.getSchemas();
-      
       const docs = await filmSchema.paginate(getQueryObject(options), getPaginationOptions(options));
       return handleUsersPaginationResponse(docs);
     } catch (error) {
@@ -67,19 +66,19 @@ const filmStore = {
         time: options.time,
       });
       const doc = await newPost.save();
-      return mapper.toDomainModel(doc, PostDomainModel);
+      return mapper.toDomainModel(doc, FilmDomainModel);
     } catch (error) {
       throw error;
     }
   },
   async getFilm(options) {
     try {
-      const { Post: postSchema } = this.getSchemas();
-      const doc = await postSchema.findOne({ _id: options.filmId }).lean().exec();
+      const { Film: filmSchema } = this.getSchemas();
+      const doc = await filmSchema.findOne({ _id: options.filmId }).lean().exec();
       if (!doc) {
         throw new errors.NotFound(`Post with id ${options.postId} not found.`);
       }
-      return mapper.toDomainModel(doc, PostDomainModel);
+      return mapper.toDomainModel(doc, FilmDomainModel);
     } catch (error) {
       throw error;
     }

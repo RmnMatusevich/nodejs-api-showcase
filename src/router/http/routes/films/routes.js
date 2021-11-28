@@ -35,6 +35,8 @@ function init({
         limit: req.query.limit ? parseInt(req.query.limit, 10) : 25,
       }),
     ));
+    console.log("filmsList - ", filmsList);
+    
     return res.send(filmsList);
   }));
 
