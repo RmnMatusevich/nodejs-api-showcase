@@ -6,7 +6,7 @@ const components = require('./components');
 let hostUrl = 'PROD_API_URL';
 
 if (!process.env.NODE_ENV) {
-  hostUrl = 'localhost:8080';
+  hostUrl = 'localhost:8000';
 }
 
 module.exports = {
@@ -55,8 +55,8 @@ module.exports = {
     },
   },
   paths: {
-    '/register/': paths.auth.register,
-    '/login': paths.auth.login,
+    '/auth/register/': paths.auth.register,
+    '/auth/login': paths.auth.login,
     '/posts': paths.posts['list-posts'],
     '/posts/': paths.posts['post-posts'],
     '/posts/{postId}/': paths.posts['get-posts'],

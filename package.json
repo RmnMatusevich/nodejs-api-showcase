@@ -1,19 +1,19 @@
 {
-  "name": "nodejs-api-showcase",
+  "name": "nodejs-hex",
   "version": "1.1.0",
-  "description": "",
+  "description": "Hexagonal Express realization",
   "main": "server.js",
   "scripts": {
     "coverage": "nyc --reporter html --reporter text mocha test --recursive",
-    "debug": "nodemon server.js",
-    "start": "node server.js",
+    "debug": "nodemon ./src/server.js",
+    "start": "node ./src/server.js",
     "test": "mocha tests --recursive --timeout 15000 --exit"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/eldimious/nodejs-api-showcase.git"
   },
-  "author": "Dimos Botsaris <botsaris.d@gmail.com>",
+  "author": "Roman Matusevich <rmnmatusevich@gmail.com>",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/eldimious/nodejs-api-showcase/issues"
