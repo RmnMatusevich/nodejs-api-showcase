@@ -28,14 +28,15 @@ function init({
   };
 
   router.get('/', asyncWrapper(async (req, res) => {    
+    const options = req.query;
+    
     const filmsList = await filmsService.listFilms(Object.assign(
-      {},
+      options,
       handlePagination({
         page: req.query.page ? parseInt(req.query.page, 10) : 1,
         limit: req.query.limit ? parseInt(req.query.limit, 10) : 25,
       }),
     ));
-    console.log("filmsList - ", filmsList);
     
     return res.send(filmsList);
   }));

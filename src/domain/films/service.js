@@ -4,10 +4,12 @@ function init({
   async function listFilms({
     limit,
     page,
+    director,
   }) {
     return filmsRepository.listFilms({
       limit,
       page,
+      director,
     });
   }
 

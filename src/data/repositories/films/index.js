@@ -28,21 +28,15 @@ const getPaginationOptions = options => ({
   lean: true,
   page: options.page || 1,
   limit: options.limit || 25,
-  sort: { created: -1 },
+  sort: { time: 1 },
 });
 
 
 const getQueryObject = (options) => {
-  // const queries = {
-  //   userId: options.userId,
-  // };
-  // if (options.publisher) {
-  //   queries.publisher = {
-  //     $regex: new RegExp(options.publisher),
-  //     $options: 'i',
-  //   };
-  // }
-  return {};
+  const queries = {
+    director: options.director,
+  };
+  return queries;
 };
 
 
