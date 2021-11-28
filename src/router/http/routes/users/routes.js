@@ -5,13 +5,14 @@ const {
   toResponseModel,
 } = require('../users/mapper');
 const postsRouter = require('../posts/routes');
+const filmsRouter = require('../films/routes');
 
 const endpointValidator = new EndpointValidator();
 const router = express.Router({ mergeParams: true });
 
-function init({ usersService, postsService, }) {
+function init({ usersService, postsService, filmsService }) {
   router.get('/:userId',
-    endpointValidator.requireSameUser,
+    // endpointValidator.requireSameUser,
     asyncWrapper(async (req, res) => {
       const result = await usersService.getUser({
         userId: req.params.userId,
@@ -25,7 +26,9 @@ function init({ usersService, postsService, }) {
   router.use('/:userId/posts', postsRouter.init({
     postsService,
   }));
-
+  router.use('/films', filmsRouter.init({
+    filmsService,
+  }));
   return router;
 }
 

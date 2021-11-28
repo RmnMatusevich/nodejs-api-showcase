@@ -9,16 +9,20 @@ const signals = require('./signals');
 const db = require('./data/infrastructure/db')({ dbConnectionString });
 const postsRepositoryContainer = require('./data/repositories/posts');
 const usersRepositoryContainer = require('./data/repositories/users');
+const filmsRepositoryContainer = require('./data/repositories/films');
 const authenticationRepositoryContainer = require('./data/repositories/authenticationRepository');
 const recourceLimiterRepositoryContainer = require('./data/repositories/recourceLimiterRepository');
 const authServiceContainer = require('./domain/auth/service');
 const postsServiceContainer = require('./domain/posts/service');
+const filmsServiceContainer = require('./domain/films/service');
+
 const usersServiceContainer = require('./domain/users/service');
 const appContainer = require('./router/http/app');
 const websocketsContainer = require('./router/websockets');
 
 const authenticationRepository = authenticationRepositoryContainer.init();
 const postsRepository = postsRepositoryContainer.init(db.schemas);
+const filmsRepository = filmsRepositoryContainer.init(db.schemas);
 const usersRepository = usersRepositoryContainer.init(db.schemas);
 const recourceLimiterRepository = recourceLimiterRepositoryContainer.init();
 const authService = authServiceContainer.init({
@@ -29,6 +33,9 @@ const authService = authServiceContainer.init({
 const postsService = postsServiceContainer.init({
   postsRepository,
 });
+const filmsService = filmsServiceContainer.init({
+  filmsRepository,
+});
 const usersService = usersServiceContainer.init({
   usersRepository,
   postsRepository,
@@ -37,6 +44,7 @@ const app = appContainer.init({
   authService,
   postsService,
   usersService,
+  filmsService,
 });
 const websockets = websocketsContainer.init(app);
 
