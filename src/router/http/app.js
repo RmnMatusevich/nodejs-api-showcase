@@ -13,6 +13,7 @@ const authenticateEndpoint = require('./middleware/authentication');
 const authRoutes = require('./routes/auth/routes');
 const usersRoutes = require('./routes/users/routes');
 const filmsRoutes = require('./routes/films/routes');
+const companiesRoutes = require('./routes/companies/routes');
 const errorRoute = require('./routes/errors');
 const swaggerDocument = require('../../swagger');
 const asyncWrapper = require('./utils/asyncWrapper');
@@ -41,6 +42,7 @@ module.exports.init = (services) => {
   });
   app.use('/users', usersRoutes.init(services));
   app.use('/films', filmsRoutes.init(services));
+  app.use('/companies', companiesRoutes.init(services));
   app.use(errorRoute);
 
   const httpServer = http.createServer(app);
